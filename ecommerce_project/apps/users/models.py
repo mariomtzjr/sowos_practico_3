@@ -1,5 +1,3 @@
-import uuid
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -8,8 +6,8 @@ from django.contrib.auth.models import User
 class User(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     uuid = models.CharField(max_length=36)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        self.uuid = str(uuid.uuid4())[:36]
-
-        super().save(*args, **kwargs)
+    def __str__(self):
+        return "{} {}".format(self.user.first_name, self.user.last_name)
