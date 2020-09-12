@@ -39,7 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'apps.ecommerce',
+    'apps.ecommerce.category',
+    'apps.ecommerce.customer',
+    'apps.ecommerce.person',
+    'apps.ecommerce.product',
+    'apps.ecommerce.purchase',
+    'apps.ecommerce.purchaseproduct',
     'apps.ecommerce.api',
     'apps.users'
 ]
