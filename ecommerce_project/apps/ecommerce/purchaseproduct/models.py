@@ -10,3 +10,7 @@ class PurchaseProducts(models.Model):
     quantity = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        verbose_name = "purchaseproduct"
+        verbose_name_plural = "purchaseproducts"

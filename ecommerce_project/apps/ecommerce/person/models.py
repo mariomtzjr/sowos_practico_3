@@ -13,6 +13,10 @@ class Person(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "person"
+        verbose_name_plural = "persons"
+
     def __str__(self):
         return "{} {}".format(self.name, self.last_name)
 

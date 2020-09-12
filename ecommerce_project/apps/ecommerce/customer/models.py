@@ -9,6 +9,10 @@ class Customer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name = "customer"
+        verbose_name_plural = "customers"
+
     def __str__(self):
         full_name = "{} {}".format(
             self.person_id.name,
