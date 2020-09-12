@@ -1,23 +1,29 @@
 from rest_framework import serializers
 
-from apps.ecommerce.models import (
-    Person,
-    Customer,
-    Purchase,
-    PurchaseProducts,
-    Product,
-    Category,
-)
+from apps.ecommerce.person.models import Person
+from apps.ecommerce.customer.models import Customer
+from apps.ecommerce.purchase.models import Purchase
+from apps.ecommerce.purchaseproduct.models import PurchaseProducts
+from apps.ecommerce.product.models import Product
+from apps.ecommerce.category.models import Category
 
 
 class PersonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Person
         fields = (
+            'id',
             'name',
             'last_name',
         )
-        read_only_fields = ('created_at', 'updated_at',)
+        read_only_fields = ('id','created_at', 'updated_at',)
+
+    def update(self, instance, validated_data):
+        instance.name = validated_data.get('name', instance.name)
+        instance.last_name = validated_data.get('last_name', instance.last_name)
+        instance.save()
+
+        return instance
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -29,7 +35,7 @@ class CustomerSerializer(serializers.ModelSerializer):
             'is_active',
             'is_deleted',
         )
-        read_only_fields = ('created_at', 'updated_at',)
+        read_only_fields = ('id', 'created_at', 'updated_at',)
 
 
 class PurchaseSerializer(serializers.ModelSerializer):
