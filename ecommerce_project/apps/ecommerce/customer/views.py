@@ -44,5 +44,6 @@ class CustomerDelete(generics.DestroyAPIView):
 
     def delete(self, request, pk):
         customer = self.get_object(pk)
-        customer.delete()
+        customer.is_active = False
+        customer.is_deleted = True
         return redirect('customer_list')
