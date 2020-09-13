@@ -11,16 +11,10 @@
 ## Set up
 1. Clonar el repositorio
 2. En la terminal ejecutamos `cd sowos_practico_3/ecommerce_project`
-<<<<<<< HEAD
 3. Ejecutamos el comando `docker-compose build`
 4. Ejecutamos el comando `docker-compose up`
 En una nueva terminal ejecutamos el siguiente comando:  
 `docker-compose exec web python manage.py collectstatic --no-input --clear`  
-=======
-3. Ejecutar `docker-compose exec web python manage.py collectstatic --no-input --clear`
-3. Ejecutamos el comando `docker-compose build`
-4. Ejecutamos el comando `docker-compose up`
->>>>>>> master
 
 ## Creación de super usuario
 Para crear un super usuario y podemos ingresar al sitio de administración de la aplicación, abrimos otra ventana de terminal y nos situamos dentro del directorio *sowos_practico_3/ecommerce_project*. Estando en este directorio ejecutamos el comando:  
@@ -44,8 +38,5 @@ Cada uno de los endpoint listados tiene las siguientes funcionalidades
 - editar/id
 - eliminar/id
 
-<<<<<<< HEAD
 El parámetro *id* corresponde al id del objeto que dentro del endpoint en cuestión, por ejemplo, si el endpoint es *http://localhost:1337/persons/editar/1*, la funcionalidad es la de editar la persona con el *identificador igual a 1* o bien, *http://localhost:1337/products/eliminar/3*, la funcionalidad es la de eliminar el producto con el *identificador igual a 3*.
-=======
-El parámetro *id* corresponde al id del endpoint donde se encuentre, por ejemplo, si el endpoint es *http://localhost:1337/persons/editar/1*, la funcionalidad es la de editar la persona con el *identificador igual a 1* o bien, *http://localhost:1337/products/eliminar/3*, la funcionalidad es la de eliminar el producto con el *identificador igual a 3*.
->>>>>>> master
+
