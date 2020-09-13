@@ -17,5 +17,20 @@ RUN apk update \
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# create directory for the app user
+RUN mkdir -p /home/app
+
+# create the appropriate directories
+ENV HOME=/home/app
+ENV APP_HOME=/home/app/web
+RUN mkdir $APP_HOME
+RUN mkdir $APP_HOME/staticfiles
+WORKDIR $APP_HOME
+
 # Copiamos el proyecto
-COPY . /code/
+# COPY . /code/
+COPY . $APP_HOME
+
+CMD ["python", "manage.py", "makemigrations"]
+CMD ["python", "manage.py", "migrate"]
+CMD ["python", "manage.py", "collectstatic --no-input"]

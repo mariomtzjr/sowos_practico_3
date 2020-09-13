@@ -12,7 +12,7 @@ services:
       - redis:redis
     volumes:
       - /usr/src/app
-      - /usr/src/app/static
+      - static_volume:/home/app/web/staticfiles
     env_file: .env.dev
     command: /usr/local/bin/gunicorn ecommerce_project.wsgi:application -w 2 -b :8000
 
@@ -47,3 +47,4 @@ services:
 volumes:
   redisdata:
   pgdata:
+  static_volume:

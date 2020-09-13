@@ -27,8 +27,7 @@ class Purchase(models.Model):
         products = dict(Counter([Product.objects.get(id=product.product_id.id) for product in purchases]))
 
         return products
-        
-    @property
+
     def update_purchase_data(self):
         self.subtotal = 0
         self.iva = 0.15

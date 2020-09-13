@@ -11,6 +11,7 @@
 ## Set up
 1. Clonar el repositorio
 2. En la terminal ejecutamos `cd sowos_practico_3/ecommerce_project`
+3. Ejecutar `docker-compose exec web python manage.py collectstatic --no-input --clear`
 3. Ejecutamos el comando `docker-compose build`
 4. Ejecutamos el comando `docker-compose up`
 
