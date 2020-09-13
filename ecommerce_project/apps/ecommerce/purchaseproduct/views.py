@@ -3,16 +3,23 @@ from django.shortcuts import get_object_or_404, redirect
 
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from apps.ecommerce.purchaseproduct.models import PurchaseProducts
 from apps.ecommerce.api.serializers import PurchaseProductsSerializer
 
 # Create your views here.
-class PurchaseProductsCreate(generics.CreateAPIView):
+class BaseView():
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+
+class PurchaseProductsCreate(BaseView, generics.CreateAPIView):
     serializer_class = PurchaseProductsSerializer
 
 
-class PurchaseProductsList(generics.ListAPIView):
+class PurchaseProductsList(BaseView, generics.ListAPIView):
     serializer_class = PurchaseProductsSerializer
 
     def get(self, request, *args, **kwargs):
@@ -21,7 +28,7 @@ class PurchaseProductsList(generics.ListAPIView):
         return Response({'purchase-products': serializer.data})
 
 
-class PurchaseProductsUpdate(generics.UpdateAPIView):
+class PurchaseProductsUpdate(BaseView, generics.UpdateAPIView):
     serializer_class = PurchaseProductsSerializer
 
     def put(self, request, pk):
@@ -33,7 +40,7 @@ class PurchaseProductsUpdate(generics.UpdateAPIView):
         serializer.save()
         return redirect('pruchaseproduct_list')
 
-class PurchaseProductsDelete(generics.DestroyAPIView):
+class PurchaseProductsDelete(BaseView, generics.DestroyAPIView):
     serializer_class = PurchaseProductsSerializer
 
     def get_object(self, pk):

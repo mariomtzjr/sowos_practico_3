@@ -2,17 +2,24 @@ from django.shortcuts import get_object_or_404, redirect
 
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from apps.ecommerce.person.models import Person
 from apps.ecommerce.api.serializers import PersonSerializer
 
 # Create your views here.
+class BaseView():
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
 class PersonCreate(generics.CreateAPIView):
     serializer_class = PersonSerializer
 
 
-class PersonList(generics.ListAPIView):
+class PersonList(BaseView, generics.ListAPIView):
     serializer_class = PersonSerializer
+
 
     def get(self, request, *args, **kwargs):
         queryset = Person.objects.all()

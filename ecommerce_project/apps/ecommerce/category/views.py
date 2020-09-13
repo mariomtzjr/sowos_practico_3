@@ -3,16 +3,23 @@ from django.shortcuts import get_object_or_404, redirect
 
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from apps.ecommerce.category.models import Category
 from apps.ecommerce.api.serializers import CategorySerializer
 
 # Create your views here.
-class CategoryCreate(generics.CreateAPIView):
+class BaseView():
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+
+class CategoryCreate(BaseView, generics.CreateAPIView):
     serializer_class = CategorySerializer
 
 
-class CategoryList(generics.ListAPIView):
+class CategoryList(BaseView, generics.ListAPIView):
     serializer_class = CategorySerializer
 
     def get(self, request, *args, **kwargs):
@@ -21,7 +28,7 @@ class CategoryList(generics.ListAPIView):
         return Response({'categories': serializer.data})
 
 
-class CategoryUpdate(generics.UpdateAPIView):
+class CategoryUpdate(BaseView, generics.UpdateAPIView):
     serializer_class = CategorySerializer
 
     def put(self, request, pk):
@@ -33,7 +40,7 @@ class CategoryUpdate(generics.UpdateAPIView):
         serializer.save()
         return redirect('category_list')
 
-class CategoryDelete(generics.DestroyAPIView):
+class CategoryDelete(BaseView, generics.DestroyAPIView):
     serializer_class = CategorySerializer
 
     def get_object(self, pk):

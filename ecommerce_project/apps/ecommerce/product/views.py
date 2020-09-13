@@ -3,16 +3,23 @@ from django.shortcuts import get_object_or_404, redirect
 
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 
 from apps.ecommerce.product.models import Product
 from apps.ecommerce.api.serializers import ProductSerializer
 
 # Create your views here.
-class ProductCreate(generics.CreateAPIView):
+class BaseView():
+    authentication_classes = (TokenAuthentication, )
+    permission_classes = (IsAuthenticated, )
+
+
+class ProductCreate(BaseView, generics.CreateAPIView):
     serializer_class = ProductSerializer
 
 
-class ProductList(generics.ListAPIView):
+class ProductList(BaseView, generics.ListAPIView):
     serializer_class = ProductSerializer
 
     def get(self, request, *args, **kwargs):
@@ -21,7 +28,7 @@ class ProductList(generics.ListAPIView):
         return Response({'products': serializer.data})
 
 
-class ProductUpdate(generics.UpdateAPIView):
+class ProductUpdate(BaseView, generics.UpdateAPIView):
     serializer_class = ProductSerializer
 
     def put(self, request, pk):
@@ -33,7 +40,7 @@ class ProductUpdate(generics.UpdateAPIView):
         serializer.save()
         return redirect('product_list')
 
-class ProductDelete(generics.DestroyAPIView):
+class ProductDelete(BaseView, generics.DestroyAPIView):
     serializer_class = ProductSerializer
 
     def get_object(self, pk):
