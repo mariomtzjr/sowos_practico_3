@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated
 
+from apps.ecommerce.purchase.models import Purchase
 from apps.ecommerce.purchaseproduct.models import PurchaseProducts
 from apps.ecommerce.api.serializers import PurchaseProductsSerializer
 
@@ -18,12 +19,21 @@ class BaseView():
 class PurchaseProductsCreate(BaseView, generics.CreateAPIView):
     serializer_class = PurchaseProductsSerializer
 
+    def post(self, request):
+        serializer = PurchaseProductsSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response({'serializer': serializer, 'purchase_product': purchase_product})
+        serializer.save()
+        Purchase.update_purchase_data()
+        return redirect('purchaseproduct_list')
+
+
 
 class PurchaseProductsList(BaseView, generics.ListAPIView):
     serializer_class = PurchaseProductsSerializer
 
     def get(self, request, *args, **kwargs):
-        queryset = Product.objects.all()
+        queryset = PurchaseProducts.objects.all()
         serializer = PurchaseProductsSerializer(queryset, many=True)
         return Response({'purchase-products': serializer.data})
 
