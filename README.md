@@ -28,6 +28,7 @@ Seguir instrucciones.
 - /purchases/
 - /products/
 - /purchase-products/
+- /categories/
 
 Cada uno de los endpoint listados tiene las siguientes funcionalidades
 - crear/

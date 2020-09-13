@@ -21,18 +21,6 @@ class PurchaseList(generics.ListAPIView):
         return Response({'purchases': serializer.data})
 
 
-class PurchaseUpdate(generics.UpdateAPIView):
-    serializer_class = PurchaseSerializer
-
-    def put(self, request, pk):
-        purchase = Purchase.objects.get(pk=pk)
-
-        serializer = PurchaseSerializer(instance=purchase, data=request.data, partial=True)
-        if not serializer.is_valid():
-            return Response({'serializer': serializer, 'purchase': purchase})
-        serializer.save()
-        return redirect('purchase_list')
-
 class PurchaseDelete(generics.DestroyAPIView):
     serializer_class = PurchaseSerializer
 
