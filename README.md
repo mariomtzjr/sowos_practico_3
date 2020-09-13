@@ -38,5 +38,5 @@ Cada uno de los endpoint listados tiene las siguientes funcionalidades
 - editar/id
 - eliminar/id
 
-El parámetro *id* corresponde al id del objeto que dentro del endpoint en cuestión, por ejemplo, si el endpoint es *http://localhost:1337/persons/editar/1*, la funcionalidad es la de editar la persona con el *identificador igual a 1* o bien, *http://localhost:1337/products/eliminar/3*, la funcionalidad es la de eliminar el producto con el *identificador igual a 3*.
+El parámetro *id* corresponde al id del objeto dentro del endpoint en cuestión, por ejemplo, si el endpoint es *http://localhost:1337/persons/editar/1*, la funcionalidad es la de editar la persona con el *identificador igual a 1* o bien, *http://localhost:1337/products/eliminar/3*, la funcionalidad es la de eliminar el producto con el *identificador igual a 3*.
 
