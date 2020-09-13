@@ -21,23 +21,24 @@ class Person(models.Model):
         return "{} {}".format(self.name, self.last_name)
 
     def save(self, *args, **kwargs):
-        username = "{}{}-{}".format(
-            self.name.lower(),
-            self.last_name.lower(),
-            str(uuid.uuid4())[:5]
-        )
-        user = Usr.objects.create(
-            username=username,
-            first_name=self.name,
-            last_name=self.last_name
-        )
-        user.save()
-        user_app = User.objects.create(
-            user=user,
-            uuid=str(uuid.uuid4())[:36]
-        )
-        user_app.save()
+        if not self.pk:
+            username = "{}{}-{}".format(
+                self.name.lower(),
+                self.last_name.lower(),
+                str(uuid.uuid4())[:5]
+            )
+            user = Usr.objects.create(
+                username=username,
+                first_name=self.name,
+                last_name=self.last_name
+            )
+            user.save()
+            user_app = User.objects.create(
+                user=user,
+                uuid=str(uuid.uuid4())[:36]
+            )
+            user_app.save()
 
-        self.user_id = user_app
+            self.user_id = user_app
 
-        super().save(*args, **kwargs)
+        super(Person, self).save(*args, **kwargs)

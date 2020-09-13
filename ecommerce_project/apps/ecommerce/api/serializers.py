@@ -18,13 +18,6 @@ class PersonSerializer(serializers.ModelSerializer):
         )
         read_only_fields = ('id','created_at', 'updated_at',)
 
-    def update(self, instance, validated_data):
-        instance.name = validated_data.get('name', instance.name)
-        instance.last_name = validated_data.get('last_name', instance.last_name)
-        instance.save()
-
-        return instance
-
 
 class CustomerSerializer(serializers.ModelSerializer):
     class Meta:

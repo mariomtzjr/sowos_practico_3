@@ -17,7 +17,7 @@ En una nueva terminal ejecutamos el siguiente comando:
 `docker-compose exec web python manage.py collectstatic --no-input --clear`  
 
 ## Creación de super usuario
-Para crear un super usuario y podemos ingresar al sitio de administración de la aplicación, abrimos otra ventana de terminal y nos situamos dentro del directorio *sowos_practico_3/ecommerce_project*. Estando en este directorio ejecutamos el comando:  
+Para crear un super usuario y poder ingresar al sitio de administración de la aplicación, abrimos otra ventana de terminal y nos situamos dentro del directorio *sowos_practico_3/ecommerce_project*. Estando en este directorio ejecutamos el comando:  
 `docker-compose exec web python manage.py createsuperuser`  
 Seguir instrucciones.
 
@@ -39,4 +39,3 @@ Cada uno de los endpoint listados tiene las siguientes funcionalidades
 - eliminar/id
 
 El parámetro *id* corresponde al id del objeto dentro del endpoint en cuestión, por ejemplo, si el endpoint es *http://localhost:1337/persons/editar/1*, la funcionalidad es la de editar la persona con el *identificador igual a 1* o bien, *http://localhost:1337/products/eliminar/3*, la funcionalidad es la de eliminar el producto con el *identificador igual a 3*.
-

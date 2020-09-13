@@ -13,7 +13,7 @@ class BaseView():
     authentication_classes = (TokenAuthentication, )
     permission_classes = (IsAuthenticated, )
 
-class PersonCreate(generics.CreateAPIView):
+class PersonCreate(BaseView, generics.CreateAPIView):
     serializer_class = PersonSerializer
 
 
@@ -27,7 +27,7 @@ class PersonList(BaseView, generics.ListAPIView):
         return Response({'persons': serializer.data})
 
 
-class PersonUpdate(generics.UpdateAPIView):
+class PersonUpdate(BaseView, generics.UpdateAPIView):
     serializer_class = PersonSerializer
 
     def put(self, request, pk):
@@ -39,7 +39,7 @@ class PersonUpdate(generics.UpdateAPIView):
         serializer.save()
         return redirect('person_list')
 
-class PersonDelete(generics.DestroyAPIView):
+class PersonDelete(BaseView, generics.DestroyAPIView):
     serializer_class = PersonSerializer
 
     def get_object(self, pk):
